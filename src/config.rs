@@ -11,6 +11,6 @@ pub fn load_config_file(cli: &Cli) -> Result<ConfigFile, LError> {
         None => leaf::config::load_config_file_from_root(
             cli.root.clone().unwrap_or(PathBuf::from("/")).as_path(),
         ),
-        Some(config) => leaf::config::parse_config_file(&config),
+        Some(config) => leaf::config::parse_config_file(config),
     }
 }
