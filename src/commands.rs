@@ -1,3 +1,4 @@
+mod install;
 mod update;
 
 use super::cli::Cli;
@@ -8,6 +9,7 @@ use leaf::error::LError;
 #[derive(Subcommand, Debug)]
 pub enum Commands {
     Update(update::UpdateCommand),
+    Install(install::InstallCommand),
 }
 
 /// Takes the command line arguments and executes the matching command
@@ -16,6 +18,7 @@ pub fn exec_command(cli: &Cli) -> Result<(), LError> {
 
     match &cli.command {
         Update(update) => update.execute(cli)?,
+        Install(install) => install.execute(cli)?,
     }
     Ok(())
 }
