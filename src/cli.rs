@@ -24,6 +24,10 @@ pub struct Cli {
     #[arg(short = 'R', long)]
     pub root: Option<PathBuf>,
 
+    /// Specify the directory for download caching
+    #[arg(long)]
+    pub download_cache: Option<PathBuf>,
+
     /// Turn off progress bar rendering
     #[arg(long = "noProgress", action = ArgAction::SetFalse)]
     pub progress: Option<bool>,
@@ -59,6 +63,11 @@ impl Cli {
         config.root = match &self.root {
             None => config.root.clone(),
             Some(root) => Some(root.clone()),
+        };
+
+        config.download_dir = match &self.download_cache {
+            None => config.download_dir.clone(),
+            Some(dir) => Some(dir.clone()),
         };
 
         config.render_bar = match self.progress {
